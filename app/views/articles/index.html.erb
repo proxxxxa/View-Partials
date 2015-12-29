@@ -8,6 +8,9 @@
 
 
 <ul id='articles'><%= render partial: 'article', collection: @articles %></ul>
-<%= link_to "Change sorting", articles_path %>
+<%= link_to "Sort by title", articles_path(:title => 'title')  %>
+<%= link_to "Sort by word count", articles_path(:word_count => 'word_count') %>
+<%= link_to "Sort by published", articles_path(:published => 'published') %>
+
 
 

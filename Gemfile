@@ -18,4 +18,5 @@ group :development, :test do
   #gem 'rb-fsevent'
   gem 'database_cleaner'
   gem 'launchy'
+  gem 'pry'
 end

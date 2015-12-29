@@ -5,7 +5,7 @@ class ArticlesController < ApplicationController
 
   def index
    # @articles, @tag = Article.search_by_tag_name(params[:tag])
-   @articles = Article.ordered_by(params[:order_by]).only(params[:only])
+   @articles = Article.ordered_by(params[:order_by])
    # @articles = Article.only(params[:only])
   end
 
