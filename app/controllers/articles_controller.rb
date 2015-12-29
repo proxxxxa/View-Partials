@@ -4,7 +4,9 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @articles, @tag = Article.search_by_tag_name(params[:tag])
+   # @articles, @tag = Article.search_by_tag_name(params[:tag])
+   @articles = Article.ordered_by(params[:order_by]).only(params[:only])
+   # @articles = Article.only(params[:only])
   end
 
   def new
@@ -12,7 +14,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = Article.new(title: params[:article][:title], body: params[:article][:body])
     if @article.save
       flash[:notice] = "Article was created."
       redirect_to articles_path

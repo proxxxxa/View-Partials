@@ -73,4 +73,23 @@ class Article < ActiveRecord::Base
       yield if block_given?
     end
   end
+
+  def self.ordered_by(param)
+    case param
+    when 'word count'   then Article.order('word count')
+    when 'title'        then Article.order('title')
+    when 'published'    then Article.order('published')
+    else                     Article.all
+    end
+  end
+
+  def self.only(param)
+    if (param.to_i >= 0) 
+      Article.all.limit(param)
+    else 
+      Article.all 
+    end
+  end
+
+
 end
