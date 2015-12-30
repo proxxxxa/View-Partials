@@ -1,6 +1,9 @@
 <h1><%= @tag ? "Articles Tagged '#{@tag}'" : "All Articles" %></h1>
 
 <%= link_to "New Article", new_article_path, :class => 'new_article' %>
+<%= link_to "Sort by title", articles_path(:title => 'title')  %> |
+<%= link_to "Sort by word count", articles_path(:title => 'word_count') %> |
+<%= link_to "Sort by published", articles_path(:title => 'published') %>
 
 <div id="sidebar">
   Filter by Tag: <%= tag_links(Tag.all) %>
@@ -8,9 +11,8 @@
 
 
 <ul id='articles'><%= render partial: 'article', collection: @articles %></ul>
-<%= link_to "Sort by title", articles_path(:title => 'title')  %>
-<%= link_to "Sort by word count", articles_path(:word_count => 'word_count') %>
-<%= link_to "Sort by published", articles_path(:published => 'published') %>
+
+
 
 
 

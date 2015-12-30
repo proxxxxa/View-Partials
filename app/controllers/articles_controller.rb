@@ -1,11 +1,21 @@
 class ArticlesController < ApplicationController
+
+  before_filter do
+    @article = Article.find(params[:id]) if params[:id]
+  end
+
+  after_filter do
+   
+  end
+
   def show
     @article = Article.find(params[:id])
   end
 
   def index
    # @articles, @tag = Article.search_by_tag_name(params[:tag])
-   @articles = Article.ordered_by(params[:order_by])
+   @articles = Article.ordered_by(params[:title]).limit(4) #kako pozvati only methodu nakon sortiranja
+
    # @articles = Article.only(params[:only])
   end
 

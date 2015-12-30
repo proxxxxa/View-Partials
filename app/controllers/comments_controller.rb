@@ -1,4 +1,9 @@
 class CommentsController < ApplicationController
+  before_filter do 
+    
+  end
+    
+  end
   def create
     article = Article.find(params[:comment][:article_id])
     comment = article.comments.create(comment_params)
