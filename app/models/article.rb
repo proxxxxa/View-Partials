@@ -76,7 +76,7 @@ class Article < ActiveRecord::Base
 
   def self.ordered_by(param)
     case param
-    when 'word_count'   then Article.order('word_count') #problem! treba mi order(by) title.word_count
+  #  when 'word_count'   then Article.order('word_count') #problem! treba mi order(by) title.word_count
     when 'title'        then Article.order('title')
     when 'published'    then Article.order('created_at DESC')
     else                     Article.all
@@ -84,8 +84,9 @@ class Article < ActiveRecord::Base
   end
 
   def self.only(param)
+
     if (param.to_i >= 0) 
-      Article.all.limit(param)
+      Article.limit(param.to_i)
     else 
       Article.all 
     end

@@ -4,20 +4,30 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id]) if params[:id]
   end
 
-  after_filter do
-   
-  end
+  #   after_filter do
+   #    @article.each do |art|
+   #      art.title.upcase
+  #     end
+#     end
+
+  around_filter :wrap_actions
+
+  def  wrap_actions
+  begin
 
   def show
-    @article = Article.find(params[:id])
+    
   end
 
+  
   def index
    # @articles, @tag = Article.search_by_tag_name(params[:tag])
-   @articles = Article.ordered_by(params[:title]).limit(4) #kako pozvati only methodu nakon sortiranja
-
+   @articles = Article.ordered_by(params[:title]).limit(5) #kako pozvati only methodu nakon sortiranja
+   @article = Article.only(3)
+   
    # @articles = Article.only(params[:only])
   end
+  
 
   def new
     @article = Article.new
@@ -38,7 +48,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article = Article.find params[:id]
+    
     if @article.update_attributes(article_params)
       flash[:notice] = "Article was updated."
       redirect_to article_path(@article)
@@ -53,11 +63,19 @@ class ArticlesController < ApplicationController
     flash[:notice] = "#{article} was destroyed."
     redirect_to articles_path
   end
+
+
   
   private
 
   def article_params
     params.require(:article).permit(:title, :body, :author_id)
   end
+
+  rescue
+  flash[:notice] = "Apology."
+  redirect_to articles_path
+  end
+end
   
 end

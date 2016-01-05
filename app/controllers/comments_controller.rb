@@ -1,9 +1,8 @@
 class CommentsController < ApplicationController
-  before_filter do 
+    before_filter :sadhappy, only: [:create]
+
     
-  end
-    
-  end
+  
   def create
     article = Article.find(params[:comment][:article_id])
     comment = article.comments.create(comment_params)
@@ -17,4 +16,10 @@ class CommentsController < ApplicationController
   def comment_params
     params.require(:comment).permit(:article_id, :author_name, :body)
   end
+
+  private 
+   def sadhappy
+     article = Article.find(params[:comment][:article_id])
+     comment = article.comments(comment_params[:body]).gsub("sad", "happy")
+    end
 end
