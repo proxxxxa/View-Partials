@@ -10,10 +10,10 @@ class ArticlesController < ApplicationController
   #     end
 #     end
 
-  around_filter :wrap_actions
+  #around_filter :wrap_actions
 
-  def  wrap_actions
-  begin
+  #def  wrap_actions
+  #begin
 
   def show
     
@@ -58,6 +58,7 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    redirect_to articles_path unless 1>1
     article = Article.find params[:id]
     article.destroy
     flash[:notice] = "#{article} was destroyed."
@@ -72,10 +73,10 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:title, :body, :author_id)
   end
 
-  rescue
-  flash[:notice] = "Apology."
-  redirect_to articles_path
-  end
-end
+  #rescue
+  #flash[:notice] = "Apology."
+  #redirect_to articles_path
+  #end
+#end
   
 end

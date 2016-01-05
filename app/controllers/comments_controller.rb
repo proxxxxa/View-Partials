@@ -7,8 +7,16 @@ class CommentsController < ApplicationController
     article = Article.find(params[:comment][:article_id])
     comment = article.comments.create(comment_params)
 
-    flash[:notice] = "Your comment was added."
-    redirect_to article_path(article)
+    if comment.save
+      redirect_to article_path(article), notice: "Your comment was added!"
+    else
+      flash[:notice] = "Your comment failed."
+      render :show
+    end
+
+  #  flash[:notice] = "Your comment was added."
+  #  render action :show
+  #  redirect_to article_path(article), notice: "Show"
   end
 
   private
@@ -20,6 +28,6 @@ class CommentsController < ApplicationController
   private 
    def sadhappy
      article = Article.find(params[:comment][:article_id])
-     comment = article.comments(comment_params[:body]).gsub("sad", "happy")
+   #  comment = article.comments(comment_params[:body]).gsub("sad", "happy")
     end
 end
