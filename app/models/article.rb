@@ -1,9 +1,10 @@
 class Article < ActiveRecord::Base
   validates :title, :presence => true, :uniqueness => true
   validates :body, :presence => true
+  validates :title, exclusion: { in: %w(Dusan)}
 
   belongs_to :author
-  has_many :comments
+  has_many :comments#, inverse_of: :artcile
   has_many :taggings
   has_many :tags, :through => :taggings
 
@@ -47,6 +48,8 @@ class Article < ActiveRecord::Base
       tag ? [tag.articles, tag] : [[], nil]
     end
   end
+
+  #include TextValidation1
 
   def self.for_dashboard
     order('created_at DESC').limit(5)
