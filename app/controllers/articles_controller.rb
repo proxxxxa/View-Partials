@@ -58,7 +58,7 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    redirect_to articles_path unless 1>1
+   # redirect_to articles_path unless 1>1
     article = Article.find params[:id]
     article.destroy
     flash[:notice] = "#{article} was destroyed."

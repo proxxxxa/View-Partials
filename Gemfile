@@ -6,6 +6,8 @@ gem 'jquery-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
+gem 'activerecord-session_store'
+
 
 group :development, :test do
   gem 'spring'
@@ -19,4 +21,5 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'pry'
+  gem 'redis-store'
 end
