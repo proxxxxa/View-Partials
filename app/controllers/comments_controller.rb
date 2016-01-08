@@ -28,6 +28,6 @@ class CommentsController < ApplicationController
   private 
    def sadhappy
      article = Article.find(params[:comment][:article_id])
-   #  comment = article.comments(comment_params[:body]).gsub("sad", "happy")
-    end
+     comment_params[:body] = comment_params[:body].gsub("sad", "happy")
+   end
 end

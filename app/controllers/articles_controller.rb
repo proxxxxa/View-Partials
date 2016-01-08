@@ -4,16 +4,13 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id]) if params[:id]
   end
 
-  #   after_filter do
-   #    @article.each do |art|
-   #      art.title.upcase
-  #     end
-#     end
+  after_filter :titleup
 
-  #around_filter :wrap_actions
 
-  #def  wrap_actions
-  #begin
+  around_filter :wrap_actions
+
+  def  wrap_actions
+  begin
 
   def show
     
@@ -22,10 +19,10 @@ class ArticlesController < ApplicationController
   
   def index
    # @articles, @tag = Article.search_by_tag_name(params[:tag])
-   @articles = Article.ordered_by(params[:title]).limit(5) #kako pozvati only methodu nakon sortiranja
-   @article = Article.only(3)
+
+   @articles = Article.ordered_by(params[:title]).limit(5) 
+  #@articles = Article.only(4) #ovo isto radi ali pregazi sortiranje.
    
-   # @articles = Article.only(params[:only])
   end
   
 
@@ -73,10 +70,17 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:title, :body, :author_id)
   end
 
-  #rescue
-  #flash[:notice] = "Apology."
-  #redirect_to articles_path
-  #end
-#end
+  private 
+
+  def titleup
+    @articles.each do |art|
+      art.title.upcase
+   end
+  end
+  rescue
+  flash[:notice] = "Apology."
+  redirect_to articles_path
+  end
+end
   
 end

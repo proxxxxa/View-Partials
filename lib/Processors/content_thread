@@ -1,0 +1,27 @@
+class ContentThread
+	attr_reader :article, :comment
+
+	delegate :title, created_at, updated_at to :article
+	delegate :body, created_at, updated_at to :comment
+
+	def word_count
+		word_total = article.word_total_for(comment)
+		word_total.split.size + article.title.split.size
+	end
+
+	def title
+		article.title
+	end
+
+	def commentors
+		article.sellect{|cemmented| article.include?(article.comment)}
+	end
+
+	def last_updated
+		if article(updated_at) > comment(updated_at)
+			redirect_to article_path
+		else 
+			redirect_to comment_path
+	end
+
+end

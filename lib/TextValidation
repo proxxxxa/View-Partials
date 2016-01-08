@@ -11,4 +11,3 @@ def self.for_dashboard
   def self.total_word_count
     all.inject(0) {|total, a| total += a.word_count }
  end
-end

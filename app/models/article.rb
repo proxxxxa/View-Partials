@@ -78,6 +78,7 @@ class Article < ActiveRecord::Base
   end
 
   def self.ordered_by(param)
+ 
     case param
   #  when 'word_count'   then Article.order('word_count') #problem! treba mi order(by) title.word_count
     when 'title'        then Article.order('title')
@@ -94,6 +95,5 @@ class Article < ActiveRecord::Base
       Article.all 
     end
   end
-
 
 end
